@@ -25,23 +25,7 @@ CREATE TABLE IF NOT EXISTS meow_table (
 );
 INSERT INTO meow_table (name) VALUES ('MEOOW'), ('mew');
 EOF
-
-    echo "from fastapi import FastAPI
-import sqlite3
-
-app = FastAPI()
-
-def get_db_connection():
-    conn = sqlite3.connect('/home/vagrant/database.db')
-    conn.row_factory = sqlite3.Row
-    return conn
-
-@app.get('/')
-def read_root():
-    conn = get_db_connection()
-    items = conn.execute('SELECT * FROM meow_table').fetchall()
-    conn.close()
-    return {'meows': [dict(item) for item in items]}" > /home/vagrant/app.py
+    cd /vagrant
     sudo nohup uvicorn app:app --host 0.0.0.0 --port 8000 & 
   SHELL
 end
