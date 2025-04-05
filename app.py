@@ -11,6 +11,6 @@ def get_db_connection():
 @app.get('/')
 def read_root():
     conn = get_db_connection()
-    items = conn.execute('SELECT * FROM items').fetchall()
+    items = conn.execute('SELECT * FROM meow_table').fetchall()
     conn.close()
-    return {'items': [dict(item) for item in items]}
+    return {'meows': [dict(item) for item in items]}
