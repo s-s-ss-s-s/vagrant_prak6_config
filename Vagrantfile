@@ -19,11 +19,11 @@ Vagrant.configure("2") do |config|
     pip3 install fastapi uvicorn
 
     sqlite3 /home/vagrant/database.db <<EOF
-CREATE TABLE IF NOT EXISTS items (
+CREATE TABLE IF NOT EXISTS meow_table (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL
 );
-INSERT INTO items (name) VALUES ('Item 1'), ('Item 2');
+INSERT INTO meow_table (name) VALUES ('MEOOW'), ('mew');
 EOF
 
     echo "from fastapi import FastAPI
@@ -39,9 +39,9 @@ def get_db_connection():
 @app.get('/')
 def read_root():
     conn = get_db_connection()
-    items = conn.execute('SELECT * FROM items').fetchall()
+    items = conn.execute('SELECT * FROM meow_table').fetchall()
     conn.close()
-    return {'items': [dict(item) for item in items]}" > /home/vagrant/app.py
+    return {'meows': [dict(item) for item in items]}" > /home/vagrant/app.py
     sudo nohup uvicorn app:app --host 0.0.0.0 --port 8000 & 
   SHELL
 end
